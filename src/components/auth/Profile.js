@@ -8,10 +8,12 @@ import { FirstButton, SecondButton } from "../ActionButtons"
 import CopyToClipboardButton from "../CopyToClipboardButton"
 
 import { collections } from "../../firebase"
+import { useAuth } from "../../contexts/AuthContext"
 import { useDelete } from "../../contexts/DeleteContext"
 
 export default function Profile() {
   const formattedDocs = []
+  const { currentUser } = useAuth()
   const { setToDelete } = useDelete()
 
   const [name, setName] = useState("")
@@ -24,12 +26,16 @@ export default function Profile() {
 
   useEffect(() => {
     async function readDocs() {
-      const querySnapshot = await collections.getDocs(collections.passwords)
+      const query = collections.query
+
+      const querySnapshot = await collections.getDocs(
+        query(collections.passwords, currentUser.uid)
+      )
       setDocs(querySnapshot)
     }
 
     readDocs()
-  }, [])
+  }, [currentUser])
 
   docs.forEach(doc => {
     return formattedDocs.push(collections.formatDoc(doc))

@@ -88,7 +88,10 @@ export default function PasswordCard() {
     setPwdValue(password)
 
     if (currentUser) {
-      await collections.addDoc(collections.passwords, { password })
+      await collections.addDoc(collections.passwords, {
+        userId: currentUser.uid,
+        password
+      })
     }
   }
 

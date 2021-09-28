@@ -2,19 +2,26 @@ import React, { useRef } from "react"
 import { Modal, Button, Form } from "react-bootstrap"
 
 import { collections } from "../firebase"
+import { useAuth } from "../contexts/AuthContext"
 
 export default function SavePasswordModal({ show, setShow }) {
   const nameRef = useRef()
   const passwordRef = useRef()
+  const { currentUser } = useAuth()
 
   async function handleSubmit(e) {
     e.preventDefault()
 
+    const userId = currentUser.uid
     const name = nameRef.current.value
     const password = passwordRef.current.value
 
     try {
-      await collections.addDoc(collections.passwords, { name, password })
+      await collections.addDoc(collections.passwords, {
+        userId,
+        name,
+        password
+      })
       window.location.reload()
     } catch (error) {
       console.log(error.message)

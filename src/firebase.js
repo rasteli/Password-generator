@@ -15,7 +15,9 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
-  doc
+  doc,
+  query,
+  where
 } from "firebase/firestore"
 
 const app = initializeApp({
@@ -39,6 +41,9 @@ export const collections = {
   },
   getRef: (col, id) => {
     return doc(db, col, id)
+  },
+  query: (col, userId) => {
+    return query(col, where("userId", "==", userId))
   },
   formatDoc: doc => {
     return { id: doc.id, ...doc.data() }
