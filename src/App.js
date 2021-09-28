@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+
 import { AuthProvider } from "./contexts/AuthContext"
+import { DeleteProvider } from "./contexts/DeleteContext"
 
 import Login from "./components/auth/Login"
 import SignUp from "./components/auth/SignUp"
@@ -15,16 +17,21 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Switch>
-          <Route exact path="/" component={PasswordCard} />
+        <DeleteProvider>
+          <Switch>
+            <Route exact path="/" component={PasswordCard} />
 
-          <NonPrivateRoute path="/login" component={Login} />
-          <NonPrivateRoute path="/signup" component={SignUp} />
-          <NonPrivateRoute path="/reset-password" component={ForgotPassword} />
+            <NonPrivateRoute path="/login" component={Login} />
+            <NonPrivateRoute path="/signup" component={SignUp} />
+            <NonPrivateRoute
+              path="/reset-password"
+              component={ForgotPassword}
+            />
 
-          <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/update-profile" component={UpdateProfile} />
-        </Switch>
+            <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/update-profile" component={UpdateProfile} />
+          </Switch>
+        </DeleteProvider>
       </AuthProvider>
     </Router>
   )

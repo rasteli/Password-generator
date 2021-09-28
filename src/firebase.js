@@ -14,6 +14,7 @@ import {
   addDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
   doc
 } from "firebase/firestore"
 
@@ -32,10 +33,13 @@ export const collections = {
   addDoc,
   getDocs,
   updateDoc,
+  passwords: collection(db, "passwords"),
+  delete: (col, id) => {
+    return deleteDoc(doc(db, col, id))
+  },
   getRef: (col, id) => {
     return doc(db, col, id)
   },
-  passwords: collection(db, "passwords"),
   formatDoc: doc => {
     return { id: doc.id, ...doc.data() }
   }

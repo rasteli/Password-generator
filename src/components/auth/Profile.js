@@ -3,17 +3,24 @@ import { ListGroup, Form, Button, Row, Col, InputGroup } from "react-bootstrap"
 
 import MyToast from "../MyToast"
 import ProfileNavbar from "../ProfileNavbar"
+import SavePasswordModal from "../SavePasswordModal"
+import { FirstButton, SecondButton } from "../ActionButtons"
 import CopyToClipboardButton from "../CopyToClipboardButton"
 
 import { collections } from "../../firebase"
+import { useDelete } from "../../contexts/DeleteContext"
 
 export default function Profile() {
   const formattedDocs = []
+  const { setToDelete } = useDelete()
 
   const [name, setName] = useState("")
   const [docs, setDocs] = useState([])
+
+  const [del, setDel] = useState(false)
   const [saved, setSaved] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [offcanvas, setOffcanvas] = useState(false)
 
   useEffect(() => {
     async function readDocs() {
@@ -44,7 +51,11 @@ export default function Profile() {
   return (
     <>
       <ProfileNavbar />
-      <h1 className="m-3">Your passwords</h1>
+      <div className="d-flex align-items-center">
+        <h1 className="m-3 flex-grow-1">Your passwords</h1>
+        <FirstButton del={del} setDel={setDel} />
+        <SecondButton del={del} setOffcanvas={setOffcanvas} />
+      </div>
       <ListGroup>
         {formattedDocs.map(doc => (
           <ListGroup.Item key={doc.id}>
@@ -71,6 +82,13 @@ export default function Profile() {
                     text={doc.password}
                     onCopy={() => setCopied(true)}
                   />
+                  {del && (
+                    <Form.Check
+                      type="checkbox"
+                      style={{ marginLeft: 5 }}
+                      onClick={e => setToDelete(e, doc.id)}
+                    />
+                  )}
                 </InputGroup>
               </Col>
             </Form.Group>
@@ -93,6 +111,7 @@ export default function Profile() {
           show={setCopied}
         />
       )}
+      <SavePasswordModal show={offcanvas} setShow={setOffcanvas} />
     </>
   )
 }
