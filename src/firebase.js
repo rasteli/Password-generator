@@ -1,11 +1,14 @@
 import { initializeApp } from "firebase/app"
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  signOut
+  signOut,
+  updateEmail,
+  updatePassword
 } from "firebase/auth"
 
 import {
@@ -55,6 +58,8 @@ export const methods = {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   onAuthStateChanged,
+  updateEmail,
+  updatePassword,
   signOut
 }
 

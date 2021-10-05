@@ -24,11 +24,11 @@ export function AuthProvider({ children }) {
   }
 
   function updateEmail(email) {
-    return updateEmail(currentUser, email)
+    return methods.updateEmail(currentUser, email)
   }
 
   function updatePassword(password) {
-    return updatePassword(currentUser, password)
+    return methods.updatePassword(currentUser, password)
   }
 
   function logout() {
