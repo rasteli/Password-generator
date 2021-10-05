@@ -42,7 +42,8 @@ export function DeleteProvider({ children }) {
   const value = {
     docsToDelete,
     setToDelete,
-    deleteDocs
+    deleteDocs,
+    setDocs: setDocsToDelete
   }
 
   return (

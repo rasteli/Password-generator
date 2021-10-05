@@ -3,11 +3,22 @@ import { Button } from "react-bootstrap"
 
 import { useDelete } from "../contexts/DeleteContext"
 
-const FirstBtn = ({ del, setDel }) => (
-  <Button variant="outline-danger" onClick={() => setDel(!del)}>
-    <i className={del ? "fas fa-times" : "fas fa-trash"} />
-  </Button>
-)
+const FirstBtn = ({ del, setDel }) => {
+  const { setDocs } = useDelete()
+
+  function handleClick() {
+    if (!del) return setDel(true)
+
+    setDocs([])
+    setDel(false)
+  }
+
+  return (
+    <Button variant="outline-danger" onClick={handleClick}>
+      <i className={del ? "fas fa-times" : "fas fa-trash"} />
+    </Button>
+  )
+}
 
 export function FirstButton({ del, setDel }) {
   return <FirstBtn del={del} setDel={setDel} />
