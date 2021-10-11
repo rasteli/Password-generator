@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
+import useViewport from "./hooks/useViewport"
 import { AuthProvider } from "./contexts/AuthContext"
 import { DeleteProvider } from "./contexts/DeleteContext"
 
@@ -14,12 +15,18 @@ import PrivateRoute from "./components/auth/PrivateRoute"
 import NonPrivateRoute from "./components/auth/NonPrivateRoute"
 
 function App() {
+  const { innerWidth } = useViewport()
+
+  const CustomRoute = props => (
+    <>{innerWidth > 500 ? <PrivateRoute {...props} /> : <Route {...props} />}</>
+  )
+
   return (
     <Router>
       <AuthProvider>
         <DeleteProvider>
           <Switch>
-            <PrivateRoute exact path="/" component={PasswordCard} />
+            <CustomRoute exact path="/" component={PasswordCard} />
 
             <NonPrivateRoute path="/login" component={Login} />
             <NonPrivateRoute path="/signup" component={SignUp} />
