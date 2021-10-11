@@ -3,15 +3,19 @@ import { Card, Button, Form, Alert, InputGroup } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 
 import { useAuth } from "../../contexts/AuthContext"
-import CenteredContainer from "../CenteredContainer"
+import SingUpOptions from "./SingUpOptions"
+import Wrapper from "../Wrapper"
 
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
+
   const { login } = useAuth()
+
+  const history = useHistory()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const [className, setClassName] = useState("")
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -31,11 +35,15 @@ export default function Login() {
   }
 
   return (
-    <CenteredContainer>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-5">Login to your account</h2>
+    <Wrapper setClassName={setClassName}>
+      <Card className={`card-custom ${className}`}>
+        <Card.Body className="w-100">
+          <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          <div className="text-muted mb-3">
+            By creating an account, you can save and manage your generated
+            passwords.
+          </div>
           <Form onSubmit={handleSubmit}>
             <InputGroup id="email">
               <InputGroup.Text>
@@ -49,7 +57,7 @@ export default function Login() {
                 required
               />
             </InputGroup>
-            <InputGroup id="password" className="mt-3">
+            <InputGroup id="password" className="mt-3 mb-1">
               <InputGroup.Text>
                 <i className="fas fa-key" />
               </InputGroup.Text>
@@ -61,25 +69,16 @@ export default function Login() {
                 required
               />
             </InputGroup>
+            <Link to="/reset-password" className="text-muted forgot-pas">
+              Forgot password?
+            </Link>
             <Button disabled={loading} className="w-100 mt-4" type="submit">
               Login
             </Button>
-            <Link to="/reset-password" className="btn btn-secondary w-100 mt-3">
-              Forgot password?
-            </Link>
           </Form>
+          <SingUpOptions route="/signup" />
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Don't have an account?
-        <Link
-          to="/signup"
-          className="text-decoration-none mx-2"
-          style={{ color: "#0d4afc", fontWeight: "bold" }}
-        >
-          Sign Up
-        </Link>
-      </div>
-    </CenteredContainer>
+    </Wrapper>
   )
 }

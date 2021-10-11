@@ -3,22 +3,23 @@ import { Navbar, Nav } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
 
 import { useAuth } from "../contexts/AuthContext"
+import { FirstButton, SecondButton } from "./ActionButtons"
 
-export default function ProfileNavbar() {
+export default function ProfileNavbar({ del, setDel, setModal }) {
   const { logout } = useAuth()
   const history = useHistory()
 
   async function handleLogout() {
     try {
       await logout()
-      history.push("/")
+      history.push("/login")
     } catch (error) {
       console.log(error.message)
     }
   }
 
   return (
-    <Navbar bg="light" expand="sm" className="p-3">
+    <Navbar expand="sm" className="p-3 custom-navbar">
       <Navbar.Brand>
         <strong>Profile</strong>
       </Navbar.Brand>
@@ -36,6 +37,11 @@ export default function ProfileNavbar() {
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
+      <div className="d-flex align-items-center">
+        <h1 className="m-3 flex-grow-1">Your passwords</h1>
+        <FirstButton del={del} setDel={setDel} />
+        <SecondButton del={del} setModal={setModal} />
+      </div>
     </Navbar>
   )
 }

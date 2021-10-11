@@ -4,7 +4,6 @@ import { ListGroup, Form, Button, Row, Col, InputGroup } from "react-bootstrap"
 import MyToast from "../MyToast"
 import ProfileNavbar from "../ProfileNavbar"
 import SavePasswordModal from "../SavePasswordModal"
-import { FirstButton, SecondButton } from "../ActionButtons"
 import CopyToClipboardButton from "../CopyToClipboardButton"
 
 import { collections } from "../../firebase"
@@ -22,7 +21,7 @@ export default function Profile() {
   const [del, setDel] = useState(false)
   const [saved, setSaved] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [offcanvas, setOffcanvas] = useState(false)
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     async function readDocs() {
@@ -56,15 +55,13 @@ export default function Profile() {
 
   return (
     <>
-      <ProfileNavbar />
-      <div className="d-flex align-items-center">
-        <h1 className="m-3 flex-grow-1">Your passwords</h1>
-        <FirstButton del={del} setDel={setDel} />
-        <SecondButton del={del} setOffcanvas={setOffcanvas} />
-      </div>
-      <ListGroup>
+      <ProfileNavbar del={del} setDel={setDel} setModal={setModal} />
+      <ListGroup className="mt-2 p-2">
         {formattedDocs.map(doc => (
-          <ListGroup.Item key={doc.id}>
+          <ListGroup.Item
+            key={doc.id}
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+          >
             <Form.Group as={Row}>
               <Col sm="2">
                 <InputGroup>
@@ -117,7 +114,7 @@ export default function Profile() {
           show={setCopied}
         />
       )}
-      <SavePasswordModal show={offcanvas} setShow={setOffcanvas} />
+      <SavePasswordModal show={modal} setShow={setModal} />
     </>
   )
 }

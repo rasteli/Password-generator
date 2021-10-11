@@ -8,7 +8,9 @@ import {
   onAuthStateChanged,
   signOut,
   updateEmail,
-  updatePassword
+  updatePassword,
+  GoogleAuthProvider,
+  signInWithRedirect
 } from "firebase/auth"
 
 import {
@@ -57,6 +59,7 @@ export const methods = {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  signInWithRedirect,
   onAuthStateChanged,
   updateEmail,
   updatePassword,
@@ -64,4 +67,5 @@ export const methods = {
 }
 
 export const auth = getAuth()
+export const provider = new GoogleAuthProvider()
 export default app

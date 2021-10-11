@@ -1,0 +1,63 @@
+.card-custom {
+  border: 0;
+  box-shadow: 2px 5px 10px rgba(39, 39, 39, 0.753);
+}
+
+.card-auth {
+  display: flex;
+  width: 100%;
+  margin-top: 10vh;
+  max-width: 400px;
+  margin-left: 5vw;
+  min-height: 70vh;
+  align-items: center;
+  position: relative;
+}
+
+.forgot-pas {
+  text-decoration: none;
+}
+
+.sign-up-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.google-button {
+  border: 0;
+  background-color: #ea4335;
+  color: white;
+  border-radius: 50%;
+  padding: 9px 13px;
+  margin-bottom: 50px;
+}
+
+.sign-up {
+  position: absolute;
+  bottom: 15px;
+}
+
+.two-cards {
+  display: flex;
+}
+
+.card-user {
+  align-self: center;
+  min-height: 40vh;
+  margin-left: 20vw;
+}
+
+.card-no-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  min-height: 70vh;
+}
+
+.text-muted {
+  text-align: justify;
+  text-justify: inter-word;
+}

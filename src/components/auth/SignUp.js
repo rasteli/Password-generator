@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react"
 import { Card, Button, Form, Alert, InputGroup } from "react-bootstrap"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 import { useAuth } from "../../contexts/AuthContext"
-import CenteredContainer from "../CenteredContainer"
+import SingUpOptions from "./SingUpOptions"
+import Wrapper from "../Wrapper"
 
 export default function SignUp() {
   const emailRef = useRef()
@@ -11,9 +12,11 @@ export default function SignUp() {
   const passwordConfirmRef = useRef()
 
   const { signup } = useAuth()
+
   const history = useHistory()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [className, setClassName] = useState("")
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -37,10 +40,10 @@ export default function SignUp() {
   }
 
   return (
-    <CenteredContainer>
-      <Card>
-        <Card.Body>
-          <h2 className="mb-5">Set up your account</h2>
+    <Wrapper setClassName={setClassName}>
+      <Card className={`card-custom ${className}`}>
+        <Card.Body className="w-100">
+          <h2 className="text-center mb-5">Set up your account</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <InputGroup id="email">
@@ -83,18 +86,9 @@ export default function SignUp() {
               Sign Up
             </Button>
           </Form>
+          <SingUpOptions route="/login" />
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account?{" "}
-        <Link
-          to="/login"
-          className="text-decoration-none"
-          style={{ color: "#0d4afc", fontWeight: "bold" }}
-        >
-          Login
-        </Link>
-      </div>
-    </CenteredContainer>
+    </Wrapper>
   )
 }

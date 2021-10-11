@@ -44,7 +44,7 @@ export default function UpdateProfile() {
 
   return (
     <CenteredContainer>
-      <Card>
+      <Card className="card-custom">
         <Card.Body>
           <h2 className="text-center mb-4">Update profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}

@@ -8,10 +8,10 @@ export default function Navbar() {
   const { currentUser } = useAuth()
 
   return (
-    <NavbarBoo bg="light" className="p-3">
+    <NavbarBoo className="p-3 custom-navbar">
       <Nav>
         <Nav.Link as={Link} to={`${currentUser ? "/profile" : "/login"}`}>
-          <strong>Profile</strong>
+          <h1>Profile</h1>
         </Nav.Link>
       </Nav>
     </NavbarBoo>

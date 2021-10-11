@@ -14,12 +14,16 @@ import { generatePassword } from "../utils/Helper"
 import CenteredContainer from "./CenteredContainer"
 import CopyToClipboardButton from "./CopyToClipboardButton"
 
+import useViewport from "../hooks/useViewport"
+
 import { useAuth } from "../contexts/AuthContext"
 import { collections } from "../firebase"
 
 export default function PasswordCard() {
   const tooltipTarget = useRef()
+
   const { currentUser } = useAuth()
+  const { innerWidth } = useViewport()
 
   const [value, setValue] = useState(8)
   const [show, setShow] = useState(false)
@@ -102,9 +106,9 @@ export default function PasswordCard() {
 
   return (
     <>
-      <Navbar />
+      {currentUser && <Navbar />}
       <CenteredContainer>
-        <Card>
+        <Card className="card-custom">
           <Card.Header>Generate Password</Card.Header>
           <Card.Body>
             <Form onSubmit={handleSubmit}>
@@ -145,7 +149,7 @@ export default function PasswordCard() {
                   />
                 ))}
                 <Button
-                  className="mt-2"
+                  className="mt-4"
                   type="submit"
                   disabled={!checkboxSelected}
                 >
@@ -155,8 +159,8 @@ export default function PasswordCard() {
             </Form>
           </Card.Body>
         </Card>
+        {!currentUser && innerWidth <= 500 && <SignUpToast />}
       </CenteredContainer>
-      {!currentUser && <SignUpToast />}
     </>
   )
 }

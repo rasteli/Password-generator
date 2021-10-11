@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch } from "react-router-dom"
 
 import { AuthProvider } from "./contexts/AuthContext"
 import { DeleteProvider } from "./contexts/DeleteContext"
@@ -19,7 +19,7 @@ function App() {
       <AuthProvider>
         <DeleteProvider>
           <Switch>
-            <Route exact path="/" component={PasswordCard} />
+            <PrivateRoute exact path="/" component={PasswordCard} />
 
             <NonPrivateRoute path="/login" component={Login} />
             <NonPrivateRoute path="/signup" component={SignUp} />

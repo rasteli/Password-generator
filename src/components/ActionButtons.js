@@ -24,7 +24,7 @@ export function FirstButton({ del, setDel }) {
   return <FirstBtn del={del} setDel={setDel} />
 }
 
-export function SecondButton({ del, setOffcanvas }) {
+export function SecondButton({ del, setModal }) {
   const { docsToDelete, deleteDocs } = useDelete()
 
   return del ? (
@@ -40,7 +40,7 @@ export function SecondButton({ del, setOffcanvas }) {
     <Button
       variant="outline-primary"
       className="mx-3"
-      onClick={() => setOffcanvas(true)}
+      onClick={() => setModal(true)}
     >
       <i className="fas fa-plus" />
     </Button>
