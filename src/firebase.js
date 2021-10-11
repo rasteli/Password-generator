@@ -10,6 +10,7 @@ import {
   updateEmail,
   updatePassword,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithRedirect
 } from "firebase/auth"
 
@@ -66,6 +67,10 @@ export const methods = {
   signOut
 }
 
+export const providers = {
+  google: new GoogleAuthProvider(),
+  facebook: new FacebookAuthProvider()
+}
+
 export const auth = getAuth()
-export const provider = new GoogleAuthProvider()
 export default app
