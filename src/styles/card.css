@@ -53,18 +53,8 @@
   display: flex;
 }
 
-.card-user {
-  align-self: center;
-  min-height: 40vh;
-  margin-left: 20vw;
-}
-
-.card-no-user {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 400px;
-  min-height: 70vh;
+.two-cards .password {
+  margin-top: 13vh;
 }
 
 .text-muted {

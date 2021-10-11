@@ -108,7 +108,7 @@ export default function PasswordCard() {
     <>
       {currentUser && <Navbar />}
       <CenteredContainer>
-        <Card className="card-custom">
+        <Card className="card-custom password">
           <Card.Header>Generate Password</Card.Header>
           <Card.Body>
             <Form onSubmit={handleSubmit}>
