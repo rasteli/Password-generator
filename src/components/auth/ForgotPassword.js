@@ -30,7 +30,7 @@ export default function ForgotPassword() {
 
   return (
     <CenteredContainer>
-      <Card>
+      <Card className="card-custom">
         <Card.Body>
           <h2 className="text-center mb-4">Forgot password?</h2>
           {message && <Alert variant="success">{message}</Alert>}
@@ -58,16 +58,6 @@ export default function ForgotPassword() {
           </Link>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Don't have an account?{" "}
-        <Link
-          to="/signup"
-          className="text-decoration-none"
-          style={{ color: "#0d4afc", fontWeight: "bold" }}
-        >
-          Sign Up
-        </Link>
-      </div>
     </CenteredContainer>
   )
 }

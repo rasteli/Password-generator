@@ -71,3 +71,10 @@
   text-align: justify;
   text-justify: inter-word;
 }
+
+.privacy-info {
+  position: absolute;
+  right: 12px;
+  bottom: 13px;
+  color: rgba(39, 39, 39, 0.753);
+}

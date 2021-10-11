@@ -42,6 +42,12 @@ export default function SingUpOptions({ route }) {
           {route === "/signup" ? "Sign Up" : "Log In"}
         </Link>
       </span>
+      <a
+        href="https://kodikos-policy.vercel.app"
+        className="text-decoration-none privacy-info"
+      >
+        <i className="fas fa-info-circle" />
+      </a>
     </div>
   )
 }
